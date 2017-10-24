@@ -87,6 +87,7 @@ catch(PDOException $ex) {
 require_once LIBRARY_PATH . "/class.puslapiai.php";
 require_once LIBRARY_PATH . "/class.puslapioTipas.php";
 require_once LIBRARY_PATH . "/class.vartotojas.php";
+require_once LIBRARY_PATH . "/class.grupe.php";
 
 $EIV = new vartotojas($PDO);
 $EIP = new puslapiai("pradzia");
@@ -97,7 +98,8 @@ $menuPuslapiai = array(
     "klientai" => new puslapioTipas("klientai","Klientai",true,false),
     "vartotojas" => new puslapioTipas("vartotojas","Vartotojas",true,false),
     "prisijungti" => new puslapioTipas("prisijungti","Prisijungimas",false,true),
-    "atsijungti" => new puslapioTipas("atsijungti","Atsijungimas",true,false)
+    "atsijungti" => new puslapioTipas("atsijungti","Atsijungimas",true,false),
+    "grupes" => new puslapioTipas("grupes","grupes",true,false)
 );
 // TODO: pridėti funkciją registruotiPuslapi() - lengvesniam puslapių pridėjimui
 
