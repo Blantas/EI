@@ -1,0 +1,1 @@
+// Tik pradžioje naudojamas JS
