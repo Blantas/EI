@@ -10,17 +10,33 @@ class vartotojas
 {
     private $db;
 
+    private $user_id;
+    private $user_name;
+    private $user_status;
+
+    public $user_groups = array();
+
     private $klaiduZinutes;
 
     function __construct($PDO)
     {
         $this->db = $PDO;
+
+        if($this->arPrisijunges())
+        {
+            $this->user_id = $_SESSION["user_session"];
+            $this->user_name = $_SESSION["user_name"];
+            $this->user_status = $_SESSION["user_status"];
+
+            // echo "vartotojas([" . $this->user_id . "] " . $this->user_name . ")<br/>";
+
+            $this->gautiGrupes();
+        }
     }
 
     public function sukurti($user_name, $user_phone, $user_joined, $user_left, $user_status, $user_login, $user_email, $user_pass)
     {
-        try
-        {
+        try {
             $pasleptasSlaptazodis = password_hash($user_pass, PASSWORD_DEFAULT);
 
             $sql = $this->db->prepare("INSERT INTO ei_users(user_login,user_name,user_email,user_phone,user_joined,user_left,user_status,user_password) 
@@ -60,6 +76,11 @@ class vartotojas
                     $_SESSION["user_session"] = $rezultatas["ID"];
                     $_SESSION["user_name"] = $rezultatas["user_name"];
                     $_SESSION["user_status"] = $rezultatas["user_status"];
+
+                    $this->user_id = $rezultatas["ID"];
+                    $this->user_name = $rezultatas["user_name"];
+                    $this->user_status = $rezultatas["user_status"];
+                    $this->gautiGrupes();
                     return true;
                 }
                 else
@@ -74,12 +95,38 @@ class vartotojas
         }
     }
 
+    public function gautiGrupes()
+    {
+        $sql = "SELECT t1.group_ID, t2.group_name FROM ei_user_groups as t1
+                JOIN ei_groups as t2 ON t1.group_ID = t2.ID
+                WHERE t1.user_ID = :user_id";
+        $sql = $this->db->prepare($sql);
+        $sql->execute(array(":user_id" => $this->user_id));
+
+        //echo "Priklauso šioms grupėms: ";
+        while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+            //echo $row["group_name"] . " ";
+            $grupesTeises = (new grupe($this->db))->grupesTeises($row["group_ID"], $this->db);
+            $this->user_groups[$row["group_name"]] = $grupesTeises;
+        }
+        //print_r($this->user_groups);
+    }
+
+    public function arTuriTeise($teisesPavadinimas) {
+        foreach ($this->user_groups as $grupe)
+        {
+            if(isset($grupe[$teisesPavadinimas])) return true;
+        }
+        return false;
+    }
+
     public function arPrisijunges()
     {
         if(isset($_SESSION['user_session']))
         {
             return true;
         }
+        return false;
     }
 
     public function eiti($url)

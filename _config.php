@@ -84,23 +84,25 @@ catch(PDOException $ex) {
     die("Prisijungti prie duomenų bazės nepavyko!");
 }
 
-require_once LIBRARY_PATH . "/class.puslapiai.php";
+require_once LIBRARY_PATH . "/class.puslapis.php";
 require_once LIBRARY_PATH . "/class.puslapioTipas.php";
+require_once LIBRARY_PATH . "/class.puslapiai.php";
 require_once LIBRARY_PATH . "/class.vartotojas.php";
 require_once LIBRARY_PATH . "/class.grupe.php";
 
-$EIV = new vartotojas($PDO);
-$EIP = new puslapiai("pradzia");
 
-$menuPuslapiai = array(
-    "pradzia" => new puslapioTipas("pradzia","Pradžia",true,false),
-    "projektai" => new puslapioTipas("projektai","Projektai",true,false),
-    "klientai" => new puslapioTipas("klientai","Klientai",true,false),
-    "vartotojas" => new puslapioTipas("vartotojas","Vartotojas",true,false),
-    "prisijungti" => new puslapioTipas("prisijungti","Prisijungimas",false,true),
-    "atsijungti" => new puslapioTipas("atsijungti","Atsijungimas",true,false),
-    "grupes" => new puslapioTipas("grupes","grupes",true,false)
-);
-// TODO: pridėti funkciją registruotiPuslapi() - lengvesniam puslapių pridėjimui
+
+$EIV = new vartotojas($PDO);
+$EIP = new puslapis("pradzia");
+$EIM = new puslapiai();
+
+$EIM->prideti("Pradžia","Pradžia",1,"pradzia",1, 1,null,false,true,false,null);
+$EIM->prideti("Narių grupės","Grupės",1,"grupes",1, 1,null,false,true,false,null);
+$EIM->prideti("Projektai","Projektai",1,"projektai",1, 1,null,false,true,false,null);
+$EIM->prideti("Klientai","Klientai",1,"klientai",1, 1,null,false,true,false,null);
+$EIM->prideti("Vartotojas","Vartotojas",1,"vartotojas",1, 1,null,false,true,false,null);
+$EIM->prideti("Narių grupes","Grupės",1,"grupes",1, 1,null,false,true,false,null);
+$EIM->prideti("Atsijungimas","Atsijungti",1,"atsijungimas",1, 1,null,false,true,false,null);
+
 
 ?>

@@ -10,21 +10,21 @@ class puslapioTipas
 {
     private $data = array();
 
-    public function __construct($adresas, $pavadinimas, $matoPrisijunges, $matoAtsijunges)
+    public function __construct($adresas, $pavadinimas, $matoPrisijunges, $matoAtsijunges, $nuorodosTekstas, $rodymoMeniu,
+                                $tevinisPuslapis, $rodymoEile, $nuorodosTipas, $naujameLange, $reikiaTeisiu)
     {
         $this->data["puslapioAdresas"] = $adresas;
         $this->data["puslapioPavadinimas"] = $pavadinimas;
         $this->data["matoPrisijunges"] = $matoPrisijunges;
         $this->data["matoAtsijunges"] = $matoAtsijunges;
         $this->data["jauRodytas"] = false;
-
-        // TODO: pridėti puslapioNuorodosTekstas (tekstas, rašomos navigacijoje)
-
-        // TODO: pridėti nuorodosTipas (0 - vidinis svetainės puslapis, ../puslapis ; 1 - išorinis, www.google.lt)
-
-        // TODO: pridėti naujameLange (0 - ne; 1 - pvz, target="_blank")
-
-        // TODO: pridėti puslapio leidimus
+        $this->data["nuorodosTekstas"] = $nuorodosTekstas;
+        $this->data["rodymoMeniu"] = $rodymoMeniu;
+        $this->data["tevinisPuslapis"] = $tevinisPuslapis;
+        $this->data["rodymoEile"] = $rodymoEile;
+        $this->data["nuorodosTipas"] = $nuorodosTipas;
+        $this->data["naujameLange"] = $naujameLange;
+        $this->data["reikiaTeisiu"] = $reikiaTeisiu;
     }
 
     public function __get($key)

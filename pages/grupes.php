@@ -13,25 +13,38 @@ if(!$EIV->arPrisijunges()) { $EIV->eiti("Location: ../"); }
 /* jei Turi teise redaguotiTeises */
 
 
-$grupes = array();
 
-$sql = $PDO->prepare("SELECT ID, group_name FROM ei_groups");
-$sql->execute();
 
-while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-    //$grupes[] = $row["ID"];
-    $grupe = (new grupe($PDO))->grupesTeises($row["ID"], $PDO);
 
-    echo "[" . $row["ID"] . "] " . $row["group_name"] . "Teisės: <br/>";
-    //print_r($grupesTeises);
-    //print_r($grupe->teises);
-    echo "<ul>";
-    foreach (array_keys($grupe->teises) as $i) {
-        echo "<li>" . $i . "</li>";
+//var_dump($EIV->a());
+
+echo "Tikrinama ar turi teisę <b>redaguotiGrupes</b>: ";
+if($EIV->arTuriTeise("redaguotiGrupes"))  echo "YRA";
+else echo "NĖRA";
+
+
+
+
+
+
+
+
+if($EIV->arTuriTeise("redaguotiGrupes")) {
+    echo "<br/><br/>";
+    $grupes = array();
+    $sql = $PDO->prepare("SELECT ID, group_name FROM ei_groups");
+    $sql->execute();
+    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+        //$grupe = (new grupe($PDO))->grupesTeises($row["ID"], $PDO);
+        $grupe = (new grupe($PDO))->grupesTeises($row["ID"]);
+
+        echo "[" . $row["ID"] . "] " . $row["group_name"] . "Teisės: <br/>";
+        echo "<ul>";
+        foreach (array_keys($grupe) as $i) {
+            echo "<li>" . $i . "</li>";
+        }
+        echo "</ul><br/><br/>";
     }
-    echo "</ul><br/><br/>";
 }
-
-//var_dump($grupes);
 
 ?>

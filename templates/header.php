@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"><?php
 
-    echo "<title>E-Įvaizdis - " . $menuPuslapiai[$dabartinisPuslapis]->puslapioPavadinimas . "</title>";
+    //echo "<title>E-Įvaizdis - " . $menuPuslapiai[$dabartinisPuslapis]->puslapioPavadinimas . "</title>";
 
     ?>
     <link rel="stylesheet" type="text/css" href="styles/style.css">

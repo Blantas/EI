@@ -6,6 +6,10 @@ $psl = $EIP->dabartinisPuslapis(); // Grąžina aktyvų puslapį iš ?p=PUSLAPIS
 
 if($psl != null) // Ar aktyvus puslapis nurodytas
 {
+    /*
+     * Perdaryti su $EIM
+     */
+
     if($EIP->arPuslapisYra($psl)) $EIP->pakeistiPuslapi($psl); // Jei toks puslapis yra, nurodome, jog jį ir užkrautų, o ne pradinį
     else // ...jei puslapio nėra rodomas klaidos puslapis
     {
@@ -22,7 +26,7 @@ $perduotiInfo = array( // Kintamieji, kurie bus pasiekiami vidiniuose puslapiuos
     'puslapioJS'            => $EIP->arPuslapisTuriJS(), // Ar puslapis turi atskirą JS failą
     'kazkas'                => 'Sveiki, čia pradžia',
     'EIV'                   => $EIV, // Vartotojo OBJ
-    'menuPuslapiai'         => $menuPuslapiai // masyvas su sveitainės puslapiais
+    'EIM'                   => $EIM  // Svetainės puslapių OBJ
 );
 
 $EIP->pakeistiKintamuosius($perduotiInfo); // Kintamieji, kurie bus pasiekiami vidiniuose puslapiuose

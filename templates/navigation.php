@@ -6,6 +6,12 @@
  * Time: 22:07
  */
 
+
+
+//var_dump($EIM);
+
+
+
 /*
 $menuPuslapiai = array(
     "Pradžia"   => "pradzia",
@@ -24,7 +30,7 @@ if($EIV->arPrisijunges()) {
     }
 }
 */
-
+/*
 foreach ($menuPuslapiai as $key => $value) {
     if($value->jauRodytas) continue;
     if($value->matoPrisijunges != 0) {
@@ -46,12 +52,11 @@ foreach ($menuPuslapiai as $key => $value) {
         }
     }
 
-    /*
     if( ... )
     {
         // Kiti leidimai
     }
-     */
 }
+*/
 
 ?>
